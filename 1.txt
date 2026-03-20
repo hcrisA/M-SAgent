@@ -1,0 +1,55 @@
+python main.py --image /root/autodl-tmp/sam3/assets/images/truck.jpg --text "truck"
+python main.py --image /root/autodl-tmp/sam3/assets/images/test_image.jpg --text "girl in red jersey"
+python main.py --image /root/autodl-tmp/sam3/assets/images/test_image.jpg --text "boy"
+python main.py --image /root/autodl-tmp/sam3/assets/images/test_image.jpg --text "the girl's shoe"
+
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000002083_7.jpg --text "right girl"
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000000839_2.jpg --text "person on left"
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000000839_2.jpg --text "guy flopping around on the right"
+
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000004714_5.jpg --text "man on upper right near tv"
+
+vis_COCO_train2014_000000005215_1
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000005215_1.jpg --text "leg on right with shoe"
+
+vis_COCO_train2014_000000026438_3
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000026438_3.jpg --text "woman of left with arm up"
+
+vis_COCO_train2014_000000563364_14
+python main.py --image /root/autodl-tmp/RefCOCO/all_images/COCO_train2014_000000563364_14.jpg --text "woman far right"
+
+
+您的强制工具调用：
+完成所有 4 个思考步骤后，使用您刚刚选择的准确工具名称和准确参数生成工具调用。您只能调用四个可用工具中的一个："object_locator"、"concept_generator"、"image_enhancer" 和 "report_no_mask"。确保您严格遵守调用每个相应工具的规则，并将工具调用包含在 <tool> ..... </tool> HTML 标签内。
+
+场景 1 的输出格式：
+<think> 说明消息历史中只有一张图像（原始输入图像）。由于只有一张图像，您将遵循场景 1 的说明：
+
+1.分析： 在初始用户输入查询的上下文中，仔细描述和分析提供给您的原始输入图像。
+2.思考： 基于您对图像的理解以及先前所述的应如何理解初始用户输入查询的规则，思考需要定位哪些目标对象才能准确回答初始用户输入查询。
+3.提醒： 提醒自己，复习调用object_locator，concept_generator，image_enhancer，report_no_mask的重要规则
+4.决定： 根据您的推理，决定接下来应使用哪个工具以及应使用哪些参数（如果有）来调用该工具。 </think>
+<tool> {"name": "工具名称", "parameters": {"参数名称": "参数内容", "... ...": "... ..."}} </tool>
+停止您的响应并等待用户反馈。
+
+场景 2 的输出格式：
+<think> 准确说明上下文中图像的数量（恰好有两张）。由于恰好有两张图像，您将遵循场景 2 的说明：
+
+1.分析： 在初始用户输入查询的上下文中，仔细描述和分析第一张图像（原始输入图像）以及第二张（也是最新的）图像（渲染了所有最新已接受掩码的图像）。识别并列出所有带数字序号的Mask，分析其是否正确覆盖了目标。
+2.思考： 确定哪些目标已被覆盖，哪些遗漏。明确指出是否需要避开某些已覆盖区域。如果所有目标都已找到，明确声明任务完成。
+3.提醒：提醒自己，复习调用object_locator，concept_generator，image_enhancer，report_no_mask的重要规则。
+4.决定： 根据您的推理，决定接下来应使用哪个工具以及应使用哪些参数（如果有）来调用该工具。</think>
+<tool> {"name": "工具名称", "parameters": {"参数名称": "参数内容", "... ...": "... ..."}} </tool>
+
+重要的响应格式规则：
+
+1.您必须始终包含 <think> ..... </think> 字段来概述您的推理，以及 <tool> ..... </tool> 字段来指定您选择采取的操作，然后再结束一个回合。
+2.每个工具调用应是一个具有 "name" 字段和包含参数字典的 "parameters" 字段的 JSON 对象。如果不需要参数，请将 "parameters" 字段留空字典。
+3.不要将整个输出包装在一个单一的大型 JSON 对象中。
+4.不要尝试在单个回合中输出多轮工具调用。调用一个工具后立即停止。
+5.如果您的初始尝试不成功，不要放弃；尝试使用不同参数进行更多工具调用。您有充足的时间！
+
+
+开始！
+
+以下是输入图像和初始用户输入查询：
